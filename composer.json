@@ -1,0 +1,21 @@
+{
+    "name": "midnight/geo",
+    "type": "library",
+    "keywords": ["geo", "map", "google", "static"],
+    "homepage": "http://www.midnight-design.at",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rudolph Gottesheim",
+            "email": "r.gottesheim@loot.at"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2"
+    },
+    "autoload": {
+        "psr-0": {
+            "Midnight\\Geo\\": "lib/"
+        }
+    }
+}

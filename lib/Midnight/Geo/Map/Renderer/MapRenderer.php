@@ -2,9 +2,9 @@
 
 namespace Midnight\Geo\Map\Renderer;
 
-use Midnight\Geo\Map\Map;
+use Midnight\Geo\Map\MapInterface;
 
 interface MapRenderer
 {
-    public function render(Map $map);
+    public function render(MapInterface $map);
 }

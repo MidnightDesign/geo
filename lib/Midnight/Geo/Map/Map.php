@@ -2,13 +2,15 @@
 
 namespace Midnight\Geo\Map;
 
-use Midnight\Geo\Coordinates;
+use Midnight\Geo\LatLng;
+use Midnight\Geo\LatLngInterface;
 use Midnight\Geo\Map\Marker\Marker;
+use Midnight\Geo\Map\Marker\MarkerInterface;
 
-class Map
+class Map implements MapInterface
 {
     /**
-     * @var Coordinates
+     * @var LatLng
      */
     private $center;
     /**
@@ -20,13 +22,16 @@ class Map
      */
     private $makers = array();
 
-    function __construct($center = null)
+    /**
+     * @param LatLngInterface $center
+     */
+    public function __construct(LatLngInterface $center = null)
     {
         if (!is_null($center)) {
             $this->center = $center;
         }
         if (is_null($this->center)) {
-            $this->center = new Coordinates();
+            $this->center = new LatLng();
         }
     }
 
@@ -47,7 +52,7 @@ class Map
     }
 
     /**
-     * @return Coordinates
+     * @return LatLng
      */
     public function getCenter()
     {
@@ -55,7 +60,7 @@ class Map
     }
 
     /**
-     * @param Coordinates $center
+     * @param LatLng $center
      */
     public function setCenter($center)
     {
@@ -71,9 +76,9 @@ class Map
     }
 
     /**
-     * @return Marker[]
+     * @return MarkerInterface[]
      */
-    public function getMakers()
+    public function getMarkers()
     {
         return $this->makers;
     }

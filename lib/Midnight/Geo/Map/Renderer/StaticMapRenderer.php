@@ -3,6 +3,7 @@
 namespace Midnight\Geo\Map\Renderer;
 
 use Midnight\Geo\Map\Map;
+use Midnight\Geo\Map\MapInterface;
 
 /**
  * Class StaticMapRenderer
@@ -30,23 +31,24 @@ class StaticMapRenderer implements MapRenderer
     private $link = true;
 
     /**
-     * @param Map $map
+     * @param Map|MapInterface $map
      *
+     * @throws \Exception
      * @return string
      */
-    public function render(Map $map)
+    public function render(MapInterface $map)
     {
         $r = '';
         $this->setMap($map);
         $openLink = $closeLink = '';
         if ($this->getLink()) {
-            $markers = $this->getMap()->getMakers();
+            $markers = $this->getMap()->getMarkers();
             if (count($this->getMarkers()) !== 1) {
                 throw new \Exception('Can\'t render a map link if there is more than one marker. You can Switch off link rendering by calling setLink(false).');
             }
             $position = $markers[0]->getPosition();
             $openLink = '<a href="http://maps.google.com/?q=' . urlencode(
-                    (string)$position->getLatitude() . ',' . (string)$position->getLongitude()
+                    (string) $position->getLatitude() . ',' . (string) $position->getLongitude()
                 ) . '" target="_blank">';
             $closeLink = '</a>';
         }
@@ -167,21 +169,21 @@ class StaticMapRenderer implements MapRenderer
     private function getCenter()
     {
         $center = $this->getMap()->getCenter();
-        $lat = (string)$center->getLatitude();
-        $lng = (string)$center->getLongitude();
+        $lat = (string) $center->getLatitude();
+        $lng = (string) $center->getLongitude();
         return $lat . ',' . $lng;
     }
 
     private function getMarkers()
     {
-        $markers = $this->getMap()->getMakers();
+        $markers = $this->getMap()->getMarkers();
         if (count($markers) < 1) {
             return null;
         }
         $markerStrings = array();
         foreach ($markers as $marker) {
             $position = $marker->getPosition();
-            $markerStrings[] = (string)$position->getLatitude() . ',' . (string)$position->getLongitude();
+            $markerStrings[] = (string) $position->getLatitude() . ',' . (string) $position->getLongitude();
         }
         return 'color:green|' . join('|', $markerStrings);
     }

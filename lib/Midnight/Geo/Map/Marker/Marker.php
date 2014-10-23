@@ -2,22 +2,34 @@
 
 namespace Midnight\Geo\Map\Marker;
 
-use Midnight\Geo\Coordinates;
+use Midnight\Geo\LatLng;
 
-class Marker
+class Marker implements MarkerInterface
 {
     /**
-     * @var Coordinates
+     * @var LatLng
      */
     private $position;
+    /**
+     * @var string
+     */
+    protected $title;
 
-    function __construct($position)
+    /**
+     * @var string
+     */
+    protected $infoWindowContent;
+
+    /**
+     * @param LatLng $position
+     */
+    public function __construct(LatLng $position)
     {
         $this->position = $position;
     }
 
     /**
-     * @return \Midnight\Geo\Coordinates
+     * @return \Midnight\Geo\LatLng
      */
     public function getPosition()
     {
@@ -25,10 +37,42 @@ class Marker
     }
 
     /**
-     * @param \Midnight\Geo\Coordinates $position
+     * @param \Midnight\Geo\LatLng $position
      */
     public function setPosition($position)
     {
         $this->position = $position;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getInfoWindowContent()
+    {
+        return $this->infoWindowContent;
+    }
+
+    /**
+     * @param string $infoWindowContent
+     */
+    public function setInfoWindowContent($infoWindowContent)
+    {
+        $this->infoWindowContent = $infoWindowContent;
     }
 }
